@@ -1,4 +1,6 @@
 {
+
+  "references": [{ "path": "./tsconfig.node.json" }],
   "compilerOptions": {
     "target": "ES2022",
     "useDefineForClassFields": true,

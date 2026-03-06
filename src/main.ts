@@ -18,6 +18,9 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <p class="read-the-docs">
       Click on the Vite and TypeScript logos to learn more
     </p>
+    <a href="/about/about.html">
+      <button id="about" type="button">About us</button>
+    </a>
   </div>
 `
 
