@@ -1,6 +1,11 @@
-import { setupTodoForm } from "./scripts/todoForm";
+import { initDelegateListener } from "./scripts/eventListeners";
 import "./style.scss";
 
 
 
-setupTodoForm();
+
+const appRoot = document.querySelector<HTMLElement>('.js-interaction-container');
+
+if (appRoot) {
+  initDelegateListener(appRoot);
+}

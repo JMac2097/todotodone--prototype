@@ -1,3 +1,9 @@
+
+
+
+
+
+
 type formElements = {
   interactionContainer: HTMLDivElement | null;
   form: HTMLFormElement | null | undefined;
@@ -28,12 +34,9 @@ const getFormElements = (): formElements => {
   };
 };
 
-const addFormSubmitListener = (
-  form: HTMLFormElement | null | undefined,
-  input: HTMLInputElement | null | undefined,
-) => {
-  form?.addEventListener("submit", (event) => {
-    event.preventDefault();
+export const handleFormSubmit = (event: Event) => {
+  const { input } = getFormElements();
+debugger;
 
     if (input && input.value.trim() !== "") {
       const { toDoList } = getFormElements();
@@ -42,20 +45,16 @@ const addFormSubmitListener = (
         input.value = ""; // Clear the input field after adding the task
       }
     }
-  });
+
 };
 
-export const setupTodoForm = () => {
-  const { form, input, addButton, toDoList, doneList } = getFormElements();
-  if (form && input) {
-    addFormSubmitListener(form, input);
-  }
-};
+
 
 const addToToDoList = (toDoList: HTMLUListElement, task: string) => {
   const listItem = toDoListItemTemplate(task);
+  console.log("Adding task to to-do list:", task);
   toDoList.appendChild(listItem);
-  // we need to check this, as we probably dont wqnt to add this listener every time we add a task, but for now it works
+  // we need to check this, as we probably dont want to add this listener every time we add a task, but for now it works
   // further breaking this out into smaller functions will help with this
   toDoList.addEventListener("click", (event) => {
     const target = event.target as HTMLElement;
@@ -75,3 +74,8 @@ const toDoListItemTemplate = (task: string): HTMLLIElement => {
   listItem.innerHTML = `${task} <button>Done</button>`;
   return listItem;
 };
+
+// setup a single delegated event listener on the to do list, that checks if the target is a button, 
+// and if so, moves the parent li to the done list, and removes it from the to do list, rather than applying new 
+// listeners each time we create a new element
+
